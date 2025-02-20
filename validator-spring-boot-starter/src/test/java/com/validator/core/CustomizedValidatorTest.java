@@ -1,5 +1,6 @@
 package com.validator.core;
 
+import com.validator.annotation.FieldNameRoot;
 import com.validator.config.ValidatorAutoConfiguration;
 import jakarta.validation.constraints.NotBlank;
 import org.junit.jupiter.api.Assertions;
@@ -32,6 +33,7 @@ class CustomizedValidatorTest {
     void testValidate() {
     }
 
+    @FieldNameRoot
     public static class TestingObject {
         @NotBlank
         private String name;
