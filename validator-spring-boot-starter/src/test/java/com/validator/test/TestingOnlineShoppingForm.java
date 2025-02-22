@@ -2,6 +2,7 @@ package com.validator.test;
 
 import com.validator.annotation.FieldName;
 import com.validator.annotation.FieldNameRoot;
+import com.validator.annotation.LocaleConstant;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,44 +13,69 @@ import java.util.List;
 
 @FieldNameRoot
 @FieldName("Online Shopping Form")
+@FieldName(value = "網上購物表格", locale = LocaleConstant.TRADITIONAL_CHINESE)
+@FieldName(value = "网上购物表格", locale = LocaleConstant.SIMPLIFIED_CHINESE)
 public class TestingOnlineShoppingForm {
     @FieldName("Shopping Form Id")
+    @FieldName(value = "購物表格 ID", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "购物表格 ID", locale = LocaleConstant.SIMPLIFIED_CHINESE)
     private int id;
 
     @NotBlank
     @FieldName("Contact First Name")
+    @FieldName(value = "聯絡姓名 (名字)", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "联系姓名 (名字)", locale = LocaleConstant.SIMPLIFIED_CHINESE)
     private String firstname;
 
     @NotBlank
     @FieldName("Contact Last Name")
+    @FieldName(value = "聯絡姓名 (姓)", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "联系姓名 (姓)", locale = LocaleConstant.SIMPLIFIED_CHINESE)
     private String lastname;
 
     @NotBlank
     @Email
     @FieldName("Contact Email Address")
+    @FieldName(value = "聯絡電郵", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "联系电邮", locale = LocaleConstant.SIMPLIFIED_CHINESE)
     private String emailAddress;
 
     @NotBlank
-    @Email
     @FieldName("Contact Phone Number")
+    @FieldName(value = "聯絡電話號碼", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "联系电话号码", locale = LocaleConstant.SIMPLIFIED_CHINESE)
     private String phoneNumber;
 
     @Valid
     @FieldName("Shopping Cart")
-    private List<@Valid @FieldName("Shopping Cart Item") ShoppingItem> shoppingItemList;
+    @FieldName(value = "購物車", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "购物车", locale = LocaleConstant.SIMPLIFIED_CHINESE)
+    private List<@Valid
+                 @FieldName("Shopping Cart Item")
+                 @FieldName(value = "購物車物品", locale = LocaleConstant.TRADITIONAL_CHINESE)
+                 @FieldName(value = "购物车物品", locale = LocaleConstant.SIMPLIFIED_CHINESE)
+            ShoppingItem> shoppingItemList;
 
     @NotNull
     @FieldName("Selected Shipping Method")
+    @FieldName(value = "選擇的運輸方式", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "选择的运输方式", locale = LocaleConstant.SIMPLIFIED_CHINESE)
     private ShippingMethod shippingMethod;
 
     @Valid
     @NotNull(groups = {SelfCollectionShippingGroup.class})
     @Null(groups = {ToAddressShippingGroup.class})
+    @FieldName("Self Collection Form")
+    @FieldName(value = "自取表格", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "自取表格", locale = LocaleConstant.SIMPLIFIED_CHINESE)
     private SelfCollectionForm selfCollectionForm;
 
     @Valid
     @NotNull(groups = {ToAddressShippingGroup.class})
     @Null(groups = {SelfCollectionShippingGroup.class})
+    @FieldName("Address Form")
+    @FieldName(value = "地址表格", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "地址表格", locale = LocaleConstant.SIMPLIFIED_CHINESE)
     private AddressForm addressForm;
 
     private AddressForm addressForm2;
