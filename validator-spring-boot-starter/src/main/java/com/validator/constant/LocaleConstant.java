@@ -1,4 +1,4 @@
-package com.validator.annotation;
+package com.validator.constant;
 
 import java.util.Locale;
 
@@ -9,7 +9,6 @@ public class LocaleConstant {
 
     public static Locale toLocale(String localeConstant) {
         return switch (localeConstant) {
-            case ENGLISH -> Locale.ENGLISH;
             case TRADITIONAL_CHINESE -> Locale.TRADITIONAL_CHINESE;
             case SIMPLIFIED_CHINESE -> Locale.SIMPLIFIED_CHINESE;
             default -> Locale.ENGLISH;
