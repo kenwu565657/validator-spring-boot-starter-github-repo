@@ -1,4 +1,4 @@
-This repo is for a project which aim to provide support more readable validation message for hibernate validator, which include i18n error field name.
+This repo is for a project which aim to provide more readable validation message for hibernate validator, which include i18n error field name.
 Then, the project is packed as a spring-boot starter.
 ```java
 // This is the way to call the api
@@ -129,7 +129,7 @@ Locale: zh_CN.
 ```
 
 ## Steps To Use The Starter
-There are 3 Steps. Can follow the example project.
+There are 4 Steps. Can follow the example project validator-spring-boot-starter-example.
 ### 1. Add Maven Dependency In Spring Boot Project
 ```xml
 <dependency>
@@ -139,7 +139,95 @@ There are 3 Steps. Can follow the example project.
 </dependency>
 ```
 
-### 2. Inject In Spring Boot Project
+### 2. Add Annotations In DTO
 ```java
+// validator-spring-boot-starter-example/src/main/java/com/validator/example/form/SimpleForm.java
+...
+@FieldName(value = "A Simple Form")
+@FieldName(value = "簡單表格", locale = LocaleConstant.TRADITIONAL_CHINESE)
+@FieldName(value = "简单表格", locale = LocaleConstant.SIMPLIFIED_CHINESE)
+public class SimpleForm {
+    @NotBlank
+    @FieldName("Simple Form Id")
+    @FieldName(value = "簡單表格點碼", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "简单表格点码", locale = LocaleConstant.SIMPLIFIED_CHINESE)
+    private String id;
 
+    @NotBlank
+    @FieldName("Contact First Name")
+    @FieldName(value = "聯絡姓名 (名字)", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "联系姓名 (名字)", locale = LocaleConstant.SIMPLIFIED_CHINESE)
+    private String firstname;
+
+    @NotBlank
+    @FieldName("Contact Last Name")
+    @FieldName(value = "聯絡姓名 (姓)", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "联系姓名 (姓)", locale = LocaleConstant.SIMPLIFIED_CHINESE)
+    private String lastname;
+
+    @NotBlank
+    @Email
+    @FieldName("Contact Email Address")
+    @FieldName(value = "聯絡電郵", locale = LocaleConstant.TRADITIONAL_CHINESE)
+    @FieldName(value = "联系电邮", locale = LocaleConstant.SIMPLIFIED_CHINESE)
+    private String emailAddress;
+    ...
+}
+```
+
+### 3. Inject ValidationService In Spring Boot Project
+```java
+// validator-spring-boot-starter-example/src/main/java/com/validator/example/service/FormService.java
+@Service
+public class FormService {
+    private final ValidationService validatorService;
+
+    public FormService(ValidationService validatorService) {
+        this.validatorService = validatorService;
+    }
+
+    public <T> Set<ConstraintViolationWrapper<T>> validateForm(T object, Locale locale, Class<?>... groups) {
+        return validatorService.validate(object, locale, groups);
+    }
+}
+```
+
+### 4. (Optional, Example Only) Use In Restful Service
+```java
+// validator-spring-boot-starter-example/src/test/java/com/validator/example/controller/FormControllerTest.java
+...
+@Test
+void testValidateBadRequestEmailError() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post("/validate")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(
+                            """
+                            {
+                                "id": "testingId",
+                                "firstname": "testingFirstname",
+                                "lastname": "testingLastname",
+                                "emailAddress": "testingEmailAddress",
+                                "phoneNumber": "testingPhoneNumber"
+                            }
+                            """
+                            )
+                    )
+                    .andDo(MockMvcResultHandlers.print())
+                    .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                    .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(MockMvcResultMatchers.content().json(
+                            """
+                                    {
+                                        "valid": false,
+                                        "validationErrorList": [
+                                            {
+                                                "errorField": "簡單表格 - 聯絡電郵",
+                                                "errorMessage": "必須是形式完整的電子郵件位址"
+                                            }
+                                        ]
+                                    }
+                                    """
+                    ));
+}
+...
 ```
