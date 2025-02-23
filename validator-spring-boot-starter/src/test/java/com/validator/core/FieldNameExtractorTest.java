@@ -1,4 +1,4 @@
-package com.validator.annotation;
+package com.validator.core;
 
 import com.validator.test.TestingOnlineShoppingForm;
 import com.validator.test.TestingOnlineShoppingFormNotAnnotated;

@@ -1,5 +1,7 @@
-package com.validator.annotation;
+package com.validator.core;
 
+import com.validator.annotation.FieldName;
+import com.validator.constant.LocaleConstant;
 import jakarta.validation.constraints.AssertFalse;
 import jakarta.validation.constraints.AssertTrue;
 
