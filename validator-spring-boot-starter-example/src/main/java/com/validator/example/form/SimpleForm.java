@@ -1,7 +1,7 @@
 package com.validator.example.form;
 
 import com.validator.annotation.FieldName;
-import com.validator.annotation.LocaleConstant;
+import com.validator.constant.LocaleConstant;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
