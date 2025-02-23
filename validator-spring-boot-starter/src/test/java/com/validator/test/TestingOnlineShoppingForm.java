@@ -1,8 +1,7 @@
 package com.validator.test;
 
 import com.validator.annotation.FieldName;
-import com.validator.annotation.FieldNameRoot;
-import com.validator.annotation.LocaleConstant;
+import com.validator.constant.LocaleConstant;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -11,7 +10,6 @@ import jakarta.validation.constraints.Null;
 
 import java.util.List;
 
-@FieldNameRoot
 @FieldName("Online Shopping Form")
 @FieldName(value = "網上購物表格", locale = LocaleConstant.TRADITIONAL_CHINESE)
 @FieldName(value = "网上购物表格", locale = LocaleConstant.SIMPLIFIED_CHINESE)

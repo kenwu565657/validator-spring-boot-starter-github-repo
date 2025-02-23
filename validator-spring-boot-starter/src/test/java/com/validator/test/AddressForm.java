@@ -1,14 +1,12 @@
 package com.validator.test;
 
 import com.validator.annotation.FieldName;
-import com.validator.annotation.FieldNameRoot;
-import com.validator.annotation.LocaleConstant;
+import com.validator.constant.LocaleConstant;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.function.Function;
 
-@FieldNameRoot
 @FieldName("Address Information")
 @FieldName(value = "地址資訊", locale = LocaleConstant.TRADITIONAL_CHINESE)
 @FieldName(value = "地址信息", locale = LocaleConstant.SIMPLIFIED_CHINESE)

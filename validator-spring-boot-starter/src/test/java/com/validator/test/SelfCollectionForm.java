@@ -1,14 +1,12 @@
 package com.validator.test;
 
 import com.validator.annotation.FieldName;
-import com.validator.annotation.FieldNameRoot;
-import com.validator.annotation.LocaleConstant;
+import com.validator.constant.LocaleConstant;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.function.Function;
 
-@FieldNameRoot
 @FieldName("Self Collection Form")
 @FieldName(value = "自取表格", locale = LocaleConstant.TRADITIONAL_CHINESE)
 @FieldName(value = "自取表格", locale = LocaleConstant.SIMPLIFIED_CHINESE)

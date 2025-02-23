@@ -1,12 +1,10 @@
 package com.validator.test;
 
 import com.validator.annotation.FieldName;
-import com.validator.annotation.FieldNameRoot;
-import com.validator.annotation.LocaleConstant;
+import com.validator.constant.LocaleConstant;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-@FieldNameRoot
 @FieldName("Shopping Item")
 @FieldName(value = "購物物品", locale = LocaleConstant.TRADITIONAL_CHINESE)
 @FieldName(value = "购物物品", locale = LocaleConstant.SIMPLIFIED_CHINESE)
