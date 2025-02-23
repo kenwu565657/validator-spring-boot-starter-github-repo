@@ -10,7 +10,7 @@ Below is an example to use the Annotation @FieldName on the DTO object, then get
 ```java
 // The example DTO for example
 // validator-spring-boot-starter/src/test/java/com/validator/test/TestingOnlineShoppingForm.java
-@FieldNameRoot
+...
 @FieldName("Online Shopping Form")
 @FieldName(value = "網上購物表格", locale = LocaleConstant.TRADITIONAL_CHINESE)
 @FieldName(value = "网上购物表格", locale = LocaleConstant.SIMPLIFIED_CHINESE)
@@ -46,6 +46,7 @@ void validateByEnglishLocale() {
     TestingOnlineShoppingForm testingOnlineShoppingForm = getTestingOnlineShoppingForm();
     var validationResult = validationService.validate(testingOnlineShoppingForm, Locale.ENGLISH);
     printConstraintViolationWrapper(validationResult);
+    ...
 }
 ```
 The result:
@@ -76,6 +77,7 @@ void validateByTraditionalChineseLocale() {
     TestingOnlineShoppingForm testingOnlineShoppingForm = getTestingOnlineShoppingForm();
     var validationResult = validationService.validate(testingOnlineShoppingForm, Locale.TRADITIONAL_CHINESE);
     printConstraintViolationWrapper(validationResult);
+    ...
 }
 ```
 The result:
@@ -106,6 +108,7 @@ void validateBySimplifiedChineseLocale() {
     TestingOnlineShoppingForm testingOnlineShoppingForm = getTestingOnlineShoppingForm();
     var validationResult = validationService.validate(testingOnlineShoppingForm, Locale.SIMPLIFIED_CHINESE);
     printConstraintViolationWrapper(validationResult);
+    ...
 }
 ```
 The result:
