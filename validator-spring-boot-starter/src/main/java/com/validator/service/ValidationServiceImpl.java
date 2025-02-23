@@ -1,8 +1,9 @@
 package com.validator.service;
 
+import com.validator.core.FieldNameExtractor;
 import com.validator.core.FixedLocaleResolver;
 import com.validator.pojo.ConstraintViolationWrapper;
-import com.validator.service.helper.ConstraintViolationMessageTranslator;
+import com.validator.core.ConstraintViolationMessageTranslator;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -20,7 +21,8 @@ public class ValidationServiceImpl implements ValidationService {
     private final Locale defaultLocale = Locale.ENGLISH;
 
     public ValidationServiceImpl() {
-        this.constraintViolationMessageTranslator = new ConstraintViolationMessageTranslator();
+        FieldNameExtractor fieldNameExtractor = new FieldNameExtractor();
+        this.constraintViolationMessageTranslator = new ConstraintViolationMessageTranslator(fieldNameExtractor);
         Validator validator = buildValidator(defaultLocale);
         validatorPool.put(defaultLocale, validator);
     }
